@@ -1,0 +1,127 @@
+\documentclass{article}
+
+% if you need to pass options to natbib, use, e.g.:
+%     \PassOptionsToPackage{numbers, compress}{natbib}
+% before loading neurips_2020
+
+% ready for submission
+% \usepackage{neurips_2020}
+
+% to compile a preprint version, e.g., for submission to arXiv, add add the
+% [preprint] option:
+   %  \usepackage[preprint]{neurips_2020}
+
+% to compile a camera-ready version, add the [final] option, e.g.:
+     \usepackage[final]{neurips_2020}
+
+% to avoid loading the natbib package, add option nonatbib:
+%     \usepackage[nonatbib]{neurips_2020}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+
+\title{Novel vs Pre-Trained Deep Learning Models for Classification of Landscape Images
+}
+
+% The \author macro works with any number of authors. There are two commands
+% used to separate the names and addresses of multiple authors: \And and \AND.
+%
+% Using \And between authors leaves it to LaTeX to determine where to break the
+% lines. Using \AND forces a line break at that point. So, if LaTeX puts 3 of 4
+% authors names on the first line, and the last on the second line, try using
+% \AND instead of \And before the third author name. out 
+
+\author{%
+Aiden Gray\\
+\And
+Nathaniel Keplinger \\
+\And
+Kael Kleckner \\
+\And
+Manav Vats \\
+  % examples of more authors
+  % \And
+  % Coauthor \\
+  % Affiliation \\
+  % Address \\
+  % \texttt{email} \\
+  % \AND
+  % Coauthor \\
+  % Affiliation \\
+  % Address \\
+  % \texttt{email} \\
+  % \And
+  % Coauthor \\
+  % Affiliation \\
+  % Address \\
+  % \texttt{email} \\
+  % \And
+  % Coauthor \\
+  % Affiliation \\
+  % Address \\
+  % \texttt{email} \\
+  }
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+    Image classification is a well known and well studied supervised learning problem in machine learning and deep learning. Many datasets exist containing labeled images, photographs, or pictures with a defined set of target classes, so for our project we select a dataset of natural landscape images. In this project, we build and train our own multi-class classification deep learning model, and compare its performance on the test set to that of several best-of-breed pre-trained models refined on the specific training data. In addition to our novel deep learning model, we train a couple of elementary statistical learning models including a Random Forest and Support Vector Machine (SVM) to provide a measure of baseline performance (i.e. assess whether more complex deep learning techniques are justified). Additionally, we briefly explore model performance after the introduction of noise patterns to the original images. We then compare and contrast all of the models and discuss their performance and future work that could be done.
+\end{abstract}
+
+\section{Project Description}
+\subsection{Project motivation and goals}
+Our motivation for this project is to increase our understanding and experience with transfer learning and building deep learning models. We put specific focus on developing convolutional neural networks (CNNs) as a way to gain knowledge and experience from the practical application of such models. In addition to building our own model from scratch, we find it valuable for us to explore existing state-of-the art models, and gain familiarity with the process of using external and pre-trained models. While the dataset we will use is not very large, our goal is to develop a more basic but high-performing (> 90\% accuracy) deep learning model. We also aim to successfully import several pre-trained models, refine them on our specific data, and compare their structures to our model through a discussion of their classification performances. We do not anticipate any discoveries or breakthroughs, as our objective is to gain more experience applying advanced machine learning techniques.
+\subsection{Dataset}
+
+We source the dataset of images of natural spaces from kaggle.com.
+\begin{center}
+    \url{https://www.kaggle.com/datasets/puneet6060/intel-image-classification}
+\end{center}
+
+The original dataset was provided by Intel to \url{https://datahack.analyticsvidhya.com} for a Image classification Challenge. 
+The data set consists of around 25,000 images of size 150 by 150 pixels distributed into six classes.
+The images are classified as either a building, forest, glacier, mountain, sea, or a street.
+Furthermore, the data set comes pre-segmented into balanced training, test, and prediction subsets. 
+Where the training set contains roughly 14k images with each class containing between 2000 and 2500 images.
+
+\subsection{Software/Programming Language}
+
+We will use python and standard machine learning libraries for analysis and model building. These libraries include:
+
+\begin{enumerate}
+    \item Scikit-learn \\
+    \item Tensorflow \\
+    \item Pandas \\
+    \item Numpy
+\end{enumerate}{}
+\section{Papers to read}
+
+\small
+\begin{enumerate}
+    \item A. D. I. T. Y. A. VAILAYA, A. N. I. L. JAIN, and H. O. N. G. J. I. A. N. G. ZHANG, “On image classification: City Images vs. landscapes,” Pattern Recognition, vol. 31, no. 12, pp. 1921–1935, 1998. \\
+    \item D. Lu and Q. Weng, “A survey of image classification methods and techniques for improving classification performance,” International Journal of Remote Sensing, vol. 28, no. 5, pp. 823–870, 2007. \\
+    \item J. Krause, M. Stark, J. Deng, and L. Fei-Fei, “3D object representations for fine-grained categorization,” 2013 IEEE International Conference on Computer Vision Workshops, 2013. \\
+    \item R. M. Haralick, K. Shanmugam, and I. H. Dinstein, “Textural features for Image Classification,” IEEE Transactions on Systems, Man, and Cybernetics, vol. SMC-3, no. 6, pp. 610–621, 1973. \\
+\end{enumerate}
+
+
+
+\section{Teammate and work division}
+\subsection{Milestone report deliverables}
+
+By the due date for the milestone report we will have a completed necessary exploratory analysis, process the images as feature vectors, and employ dimensional reduction methods like PCA. We also aim to have outlined the necessary procedures for transfer learning and have rudimentary SVM, random forest, and CNN models built.   
+
+\subsection{Final report deliverables}
+
+By the due date of the final report we will have built and trained our own deep learning model on this dataset. We will also have trained a random forest and SVM to provide a baseline measurement for performance.  The latter half of this project will focus on cross validation testing, model evaluation and hyper-parameter tweaking. We will write functions that allow us to compare the model performance between our three model implementations and report our findings. Lastly we will have introduced noise patterns (Gaussian noise, Salt and Pepper noise, block noise, etc.) to the original images and observe influences on our models performance.
+
+
+\end{document}
