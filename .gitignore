@@ -1,3 +1,4 @@
 # MacOs files
 .DS_Store
 archive/
+__pycache__/
