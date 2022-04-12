@@ -1,4 +1,4 @@
-# MacOs files
 .DS_Store
 archive/
 __pycache__/
+*.pyc
