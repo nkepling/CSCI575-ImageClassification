@@ -9,8 +9,9 @@ from PIL import Image
 
 
 
-##### TODO: make a dataframe that has image path and label
-# TODO: make class with label attribute?
+# TODO: I pretty much hard coded to load training data...need to change that so we can use this for testing. 
+
+
 
 
 
