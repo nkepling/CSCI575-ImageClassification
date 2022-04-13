@@ -6,6 +6,8 @@ import os
 # from matplotlib.image import imsave
 import matplotlib.pyplot as plt
 from PIL import Image
+from pathlib import Path
+
 
 
 
@@ -18,12 +20,14 @@ from PIL import Image
 
 class getData:
     label  =  {"buildings": 0,"forest":1,"glacier":2,"mountain":3,"sea":4,"street":5}
-    subPath = "/archive/seg_train/seg_train"
+    #subPath = "/archive/seg_train/seg_train"
+    #subPath  = Path("/archive/seg_train/seg_train")
+
 
     def __init__(self) -> None:
         pass
 
-    def createImageDf(rootPath = os.getcwd()):
+    def createImageDf(rootPath = Path.cwd()):
         """
         This fuction creates a dataframe with filename, label (0,1,2,3,4,5), landscape type,
         and a flatened image as a numpy array... probably more useful in SVM or other Stat learning methods. 
@@ -34,7 +38,7 @@ class getData:
         print("loading...it takes a sec")
         filesWithLabel = []
         for key,val in getData.label.items():
-            files = os.listdir(rootPath+getData.subPath+"/"+key) ## file names
+            files = os.listdir(rootPath/ "archive" /"seg_train" /"seg_train"/ key) ## file names
             d = []
             for f in files:
                 d.append((f,val,key))
@@ -44,7 +48,7 @@ class getData:
         # load image, turn into numpy array, flatten then slap on dataframe
         flatImg = []
         for i in df.index:  
-            img = Image.open(rootPath + getData.subPath + "/"+df["landscape"][i]+"/"+ df['filename'][i])
+            img = Image.open(rootPath/ "archive" /"seg_train" /"seg_train"/ df["landscape"][i] / df['filename'][i])
             a = np.asarray(img)
             flatImg.append(a.flatten())
             
@@ -52,12 +56,12 @@ class getData:
         print("done")
         return df
 
-    def loadImage(df,rootPath=os.getcwd()):
+    def loadImage(df,rootPath=Path.cwd()):
         """
         A function to load an image, dispaly image with type of landscape. could be useful later when evaluating model performance.
         """
         for i in df.index:  
-            img = Image.open(rootPath + getData.subPath + "/"+df["landscape"][i]+"/"+ df['filename'][i])
+            img = Image.open(rootPath/ "archive" /"seg_train" /"seg_train"/ df["landscape"][i] / df['filename'][i])
             a = np.asarray(img)
             plt.imshow(a)
             plt.title(f"{df.landscape[i]}")
