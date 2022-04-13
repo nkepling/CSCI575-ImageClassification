@@ -9,7 +9,8 @@ from PIL import Image
 
 
 
-# TODO: I pretty much hard coded to load training data...need to change that so we can use this for testing. 
+# TODO: I pretty much hard coded to load training data...need to change that so we can use this for testing.
+# TODO: Fix how file paths are handeled -- so that it works with Windows 
 
 
 
