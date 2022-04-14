@@ -1,3 +1,4 @@
+from distutils import dir_util
 import matplotlib
 import pandas as pd
 import numpy as np
@@ -50,13 +51,13 @@ class getData:
         for i in df.index:  
             img = Image.open(rootPath/ "archive" /"seg_train" /"seg_train"/ df["landscape"][i] / df['filename'][i])
             a = np.asarray(img)
-            flatImg.append(a.flatten())
+            flatImg.append(a.ravel())
             
         df["flat_arrays"]  = flatImg
         print("done")
         return df
 
-    def loadImage(df,rootPath=Path.cwd()):
+    def dispImage(df,rootPath=Path.cwd()):
         """
         A function to load an image, dispaly image with type of landscape. could be useful later when evaluating model performance.
         """
@@ -66,13 +67,28 @@ class getData:
             plt.imshow(a)
             plt.title(f"{df.landscape[i]}")
             plt.show()
+    
+    def loadFeatureMat(path = Path.cwd(),dataset = "train"):
+        """
+        Returns NxP feature matrix where N is the number of images and P is the length of the flattened images.
+        (250 * 250) = 62500 = P
+        """
+        d = "seg_"+dataset 
+
+        flatImg = []
+        for key in getData.label.keys():  
+            files = os.listdir(path/ "archive" / d / d / key)
+            for file in files:
+                img = Image.open(path/ "archive" / d / d / key / file)
+                a = np.asarray(img)
+                flatImg.append(a.flatten())
+        return flatImg
+
+        
             
 
 
 if __name__ == '__main__':
-    df = getData.createImageDf()
-
-
-
-
-
+    pass
+    #df = getData.createImageDf()
+    mat = getData.loadFeatureMat()
