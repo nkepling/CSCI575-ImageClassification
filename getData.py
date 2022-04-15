@@ -68,21 +68,21 @@ class getData:
             plt.title(f"{df.landscape[i]}")
             plt.show()
     
-    def loadFeatureMat(path = Path.cwd(),dataset = "train"):
-        """
-        Returns NxP feature matrix where N is the number of images and P is the length of the flattened images.
-        (250 * 250) = 62500 = P
-        """
-        d = "seg_"+dataset 
+    # def loadFeatureMat(path = Path.cwd(),dataset = "train"):
+    #     """
+    #     Returns NxP feature matrix where N is the number of images and P is the length of the flattened images.
+    #     (250 * 250) = 62500 = P
+    #     """
+    #     d = "seg_"+dataset 
 
-        flatImg = []
-        for key in getData.label.keys():  
-            files = os.listdir(path/ "archive" / d / d / key)
-            for file in files:
-                img = Image.open(path/ "archive" / d / d / key / file)
-                a = np.asarray(img)
-                flatImg.append(a.flatten())
-        return flatImg
+    #     flatImg = []
+    #     for key in getData.label.keys():  
+    #         files = os.listdir(path/ "archive" / d / d / key)
+    #         for file in files:
+    #             img = Image.open(path/ "archive" / d / d / key / file)
+    #             a = np.asarray(img)
+    #             flatImg.append(a.flatten())
+    #     return flatImg
 
         
             
