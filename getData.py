@@ -1,4 +1,3 @@
-from distutils import dir_util
 import matplotlib
 import pandas as pd
 import numpy as np
@@ -89,6 +88,5 @@ class getData:
 
 
 if __name__ == '__main__':
-    pass
-    #df = getData.createImageDf()
-    mat = getData.loadFeatureMat()
+    df = getData.createImageDf()
+    # mat = getData.loadFeatureMat()
