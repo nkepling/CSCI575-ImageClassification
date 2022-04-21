@@ -1,12 +1,16 @@
-#from getData.getData import loadFeatureMat
+from numpy import array
+import numpy as np
+from getData import getData
 from sklearn.decomposition import PCA
 import matplotlib.pyplot as plt
 
 
+
 class doPCA:
+    """take pca"""
     def __init__(self) -> None:
         pass    
-    def screePlot(features):
+    def screePlot(features: array):
         pca = PCA()
         pca.fit(features)
         plt.figure()
@@ -18,4 +22,5 @@ class doPCA:
 
 
 if __name__ == '__main__':
-    pass    
+    X,y = getData.loadFeatureMat()
+    doPCA.screePlot(X)
