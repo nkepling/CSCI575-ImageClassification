@@ -2,6 +2,7 @@ from numpy import array
 import numpy as np
 from getData import getData
 from sklearn.decomposition import PCA
+from sklearn.preprocessing import StandardScaler    
 import matplotlib.pyplot as plt
 
 
@@ -11,7 +12,9 @@ class doPCA:
     def __init__(self) -> None:
         pass    
     def screePlot(features: array):
-        pca = PCA()
+        pca = PCA(n_components=2)
+        scl = StandardScaler()
+        features = scl.fit_transform(features)
         pca.fit(features)
         plt.figure()
         plt.plot(pca.explained_variance_ratio_, 'o-', color='blue')
