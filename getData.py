@@ -22,7 +22,6 @@ from pathlib import Path
 
 
 
-
 class getData:
     """
     Class to load data for SVM model, filters out the images that are not the right shape. Flattens them then creates feature array for PCA. Did thsi need to be a whole class ... probably not
