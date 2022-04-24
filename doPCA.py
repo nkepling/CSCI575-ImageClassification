@@ -22,7 +22,8 @@ class doPCA:
         plt.xlabel("Number of Principal Components")
         plt.ylabel("Variance Explained")
         plt.show()
-    def do
+        return None
+
 
 
 if __name__ == '__main__':
