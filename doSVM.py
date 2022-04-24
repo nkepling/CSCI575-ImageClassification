@@ -29,9 +29,9 @@ def testSVM(features:array, labels: array, ytest: array, xtest: array):
     f1_scores = cross_val_score(clf, features, labels, scoring = scorerVar, cv = 5)
     print(f1_scores)
     #confusion matrix
-    confusion_matrix(test, predictedSVM)
+    confusion_matrix(ytest, predictedSVM)
     #classification report
-    print(classification_report(test, predictedSVM, labels = [1]))
+    print(classification_report(ytest, predictedSVM, labels = [1]))
 
 
 
