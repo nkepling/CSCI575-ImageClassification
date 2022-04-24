@@ -31,9 +31,9 @@ def testSVM(features:array, labels: array, ytest: array, xtest: array):
     predictedSVM = clf.predict(xtest)
     print(clf.score(xtest, ytest))
     #setup to get f-score and cv
-    scorerVar = make_scorer(f1_score, pos_label=1)
-    f1_scores = cross_val_score(clf, features, labels, scoring = scorerVar, cv = 5)
-    print(f1_scores)
+    #scorerVar = make_scorer(f1_score, pos_label=1)
+    #f1_scores = cross_val_score(clf, features, labels, scoring = scorerVar, cv = 5)
+    #print(f1_scores)
     #confusion matrix
     #confusion_matrix(ytest, predictedSVM)
     #classification report
