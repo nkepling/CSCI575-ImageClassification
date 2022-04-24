@@ -22,6 +22,10 @@ def doSVM(features:array, labels: array):
 
 def testSVM(features:array, labels: array, ytest: array, xtest: array):
     clf = doSVM(features, labels)
+    pca = PCA(n_components=2)
+    scl = StandardScaler()
+    xtest = scl.fit_transform(xtest)
+    xtest = pca.fit_transform(xtest)
     predictedSVM = clf.predict(xtest)
     print(clf.score(xtest, ytest))
     #setup to get f-score and cv
