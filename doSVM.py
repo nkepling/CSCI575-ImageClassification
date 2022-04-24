@@ -24,6 +24,8 @@ def testSVM(features:array, labels: array, ytest: array, xtest: array):
     clf = doSVM(features, labels)
     pca = PCA(n_components=2)
     scl = StandardScaler()
+    features = scl.fit_transform(features)
+    features = pca.fit_transform(features)
     xtest = scl.fit_transform(xtest)
     xtest = pca.fit_transform(xtest)
     predictedSVM = clf.predict(xtest)
