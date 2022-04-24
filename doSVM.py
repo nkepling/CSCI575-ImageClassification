@@ -5,6 +5,10 @@ from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler 
 from sklearn import svm
 import matplotlib.pyplot as plt
+from sklearn.model_selection import cross_val_score
+from sklearn.model_selection import cross_val_score
+from sklearn.metrics import confusion_matrix, f1_score, classification_report, make_scorer
+
 
 
 def doSVM(features:array, labels: array):
@@ -16,7 +20,18 @@ def doSVM(features:array, labels: array):
     clf.fit(features,labels)
     return clf
 
-
+def testSVM(features:array, labels: array, ytest: array, xtest: array):
+    clf = doSVM(features, labels)
+    predictedSVM = clf.predict(xtest)
+    print(clf.score(xtest, ytest))
+    #setup to get f-score and cv
+    scorerVar = make_scorer(f1_score, pos_label=1)
+    f1_scores = cross_val_score(clf, features, labels, scoring = scorerVar, cv = 5)
+    print(f1_scores)
+    #confusion matrix
+    confusion_matrix(test, predictedSVM)
+    #classification report
+    print(classification_report(test, predictedSVM, labels = [1]))
 
 
 
