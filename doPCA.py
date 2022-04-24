@@ -2,7 +2,7 @@ from numpy import array
 import numpy as np
 from getData import getData
 from sklearn.decomposition import PCA
-from sklearn.preprocessing import StandardScaler    
+from sklearn.preprocessing import StandardScaler 
 import matplotlib.pyplot as plt
 
 
@@ -22,7 +22,7 @@ class doPCA:
         plt.xlabel("Number of Principal Components")
         plt.ylabel("Variance Explained")
         plt.show()
-    def do
+        return None
 
 
 if __name__ == '__main__':
