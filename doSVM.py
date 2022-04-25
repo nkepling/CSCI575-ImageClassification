@@ -39,5 +39,7 @@ def testSVM(features:array, labels: array, ytest: array, xtest: array):
     #classification report
     print(classification_report(ytest, predictedSVM, labels = [1]))
 
-
-
+if __name__ == "__main__":
+    xTrain,yTrain = getData.loadFeatureMat()
+    xTest,yTest = getData.loadFeatureMat(dataset="test")
+    testSVM(xTrain,yTrain,yTest,xTest)
