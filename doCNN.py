@@ -1,3 +1,4 @@
+from sklearn.metrics import plot_confusion_matrix
 import tensorflow as tf
 from tensorflow.keras.layers import Input, Dense, Dropout, Flatten, Conv2D, MaxPool2D
 from tensorflow.keras import layers 
@@ -5,7 +6,7 @@ import numpy as np
 import scipy
 import matplotlib
 import matplotlib.pyplot as plt
-from tensorflow.keras.utils import image_dataset_from_directory
+from tensorflow.keras.utils import image_dataset_from_directory, plot_model
 from tensorflow.keras.models import Sequential
 from pathlib import Path
 
@@ -59,6 +60,11 @@ class doCNN:
 
     def plotAcc(history):
         pass
+    
+    def testCNN(testData):
+        pass
+
+        
 
 
 
@@ -67,20 +73,10 @@ class doCNN:
 
 
 
-
-    
-
-
-
-
-
-
-
 if __name__ == "__main__":
     train_ds = doCNN.getCNNData()
     h,model  = doCNN.doCNN(train_ds,epochs=10)
-    acc = h.history["accuracy"]
-    loss = h.history["loss"]
+    plot_model(model,to_file='cnn_model.png',show_shapes = True,show_layer_activations=True)
 
 
     
