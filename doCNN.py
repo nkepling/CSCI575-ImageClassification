@@ -76,7 +76,7 @@ class doCNN:
 
 if __name__ == "__main__":
     train_ds = doCNN.getCNNData()
-    h  = doCNN.doCNN(train_ds)
+    h  = doCNN.doCNN(train_ds,epochs=10)
 
     
 
