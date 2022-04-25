@@ -55,8 +55,10 @@ class doCNN:
               metrics=['accuracy'])
         history = model.fit(ds,epochs=epochs)
 
-        return history
+        return history,model
 
+    def plotAcc(history):
+        pass
 
 
 
@@ -76,7 +78,10 @@ class doCNN:
 
 if __name__ == "__main__":
     train_ds = doCNN.getCNNData()
-    h  = doCNN.doCNN(train_ds,epochs=10)
+    h,model  = doCNN.doCNN(train_ds,epochs=10)
+    acc = h.history["accuracy"]
+    loss = h.history["loss"]
+
 
     
 
