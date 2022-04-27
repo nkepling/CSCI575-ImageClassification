@@ -24,9 +24,9 @@ class doCNN:
     img_width = 150 
 
     def getCNNData(dataset = "train"):
-        subset = "seg_"+dataset
+        dset = "seg_"+dataset
         rootPath = Path.cwd()
-        data_dir = rootPath / "archive" / "seg_train" / subset
+        data_dir = rootPath / "archive" / "seg_train" /dset
         ds = image_dataset_from_directory(
         data_dir,
         labels='inferred',
@@ -75,7 +75,7 @@ class doCNN:
 
 if __name__ == "__main__":
     train_ds = doCNN.getCNNData()
-    h,model  = doCNN.doCNN(train_ds,epochs=10)
+    h,model  = doCNN.doCNN(train_ds,epochs=50)
     plot_model(model,to_file='cnn_model.png',show_shapes = True,show_layer_activations=True)
 
 
