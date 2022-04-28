@@ -29,7 +29,6 @@ def getCNNData(dataset = "train",subset = "training"):
         subset=subset,
         seed=123,
         labels='inferred',
-        seed=123,
         image_size=(150, 150),
         batch_size=32)
         # AUTOTUNE = tf.data.AUTOTUNE
@@ -44,7 +43,7 @@ class doCNN:
     def __init__(self) -> None:
         pass
 
-    def doCNN(self,trainds,valds,activation='relu',epochs =10):
+    def doCNN(trainds,valds,activation='relu',epochs =10):
         """
         build model, compile model
         """
@@ -68,7 +67,7 @@ class doCNN:
 
         return history,model
 
-    def plots(self,history,epochs):
+    def plots(history,epochs):
         #TODO: accuracy and loss plots 
         """
         Plot accuracy, and loss plots
@@ -114,10 +113,10 @@ class doCNN:
 
 
 if __name__ == "__main__":
-    epochs = 50
+    epochs = 10
     train_ds = getCNNData()
     val_ds = getCNNData(dataset="train",subset="validation")
-    history,model  = doCNN.doCNN(train_ds,valds=val_ds,epochs=epochs)
+    history,model  = doCNN.doCNN(train_ds,val_ds,epochs=epochs)
     plot_model(model,to_file='cnn_model.png',show_shapes = True,show_layer_activations=True)
     doCNN.plots(history=history,epochs=epochs)
 
