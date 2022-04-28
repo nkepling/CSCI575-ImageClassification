@@ -113,7 +113,7 @@ class doCNN:
 
 
 if __name__ == "__main__":
-    epochs = 10
+    epochs = 50
     train_ds = getCNNData()
     val_ds = getCNNData(dataset="train",subset="validation")
     history,model  = doCNN.doCNN(train_ds,val_ds,epochs=epochs)
