@@ -29,6 +29,9 @@ class doCNN:
         data_dir = rootPath / "archive" / "seg_train" /dset
         ds = image_dataset_from_directory(
         data_dir,
+        validation_split=0.2,
+        subset="training",
+        seed=123,
         labels='inferred',
         seed=123,
         image_size=(150, 150),
@@ -53,16 +56,25 @@ class doCNN:
         ])
         model.compile(optimizer='adam',
               loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
-              metrics=['accuracy'])
+              metrics=['accuracy',])
         history = model.fit(ds,epochs=epochs)
 
         return history,model
 
-    def plotAcc(history):
+    def plots(history):
+        #TODO: accuracy and loss plots 
+        """
+        Plot accuracy, and loss plots
+        """
         pass
     
     def testCNN(testData):
         pass
+
+    def validateCNN(validationData):
+        pass
+
+
 
         
 
