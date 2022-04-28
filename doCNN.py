@@ -15,15 +15,11 @@ tf.random.set_seed(0)
 
 
 
-batch_size = 32
+
 img_height = 150
 img_width = 150
 
-class doCNN:
-    img_height = 150
-    img_width = 150 
-
-    def getCNNData(dataset = "train",subset = "training"):
+def getCNNData(dataset = "train",subset = "training"):
         dset = "seg_"+dataset
         rootPath = Path.cwd()
         data_dir = rootPath / "archive" / "seg_train" /dset
@@ -40,7 +36,15 @@ class doCNN:
         # ds = ds.cache().shuffle(1000).prefetch(buffer_size=AUTOTUNE)
         return ds
 
-    def doCNN(trainds,valds,activation='relu',epochs = 10):
+class doCNN:
+    img_height = 150
+    img_width = 150
+    batch_size = 32 
+
+    def __init__(self) -> None:
+        pass
+
+    def doCNN(self,trainds,valds,activation='relu',epochs =10):
         """
         build model, compile model
         """
@@ -64,12 +68,33 @@ class doCNN:
 
         return history,model
 
-    def plots(history):
+    def plots(self,history,epochs):
         #TODO: accuracy and loss plots 
         """
         Plot accuracy, and loss plots
         """
-        pass
+        acc = history.history['accuracy']
+        val_acc = history.history['val_accuracy']
+
+        loss = history.history['loss']
+        val_loss = history.history['val_loss']
+
+        epochs_range = range(epochs)
+
+        plt.figure(figsize=(8, 8))
+        plt.subplot(1, 2, 1)
+        plt.plot(epochs_range, acc, label='Training Accuracy')
+        plt.plot(epochs_range, val_acc, label='Validation Accuracy')
+        plt.legend(loc='lower right')
+        plt.title('Training and Validation Accuracy')
+
+        plt.subplot(1, 2, 2)
+        plt.plot(epochs_range, loss, label='Training Loss')
+        plt.plot(epochs_range, val_loss, label='Validation Loss')
+        plt.legend(loc='upper right')
+        plt.title('Training and Validation Loss')
+        plt.savefig("acc_valPlots.png")
+
     
     def testCNN(testData):
         pass
@@ -89,10 +114,12 @@ class doCNN:
 
 
 if __name__ == "__main__":
-    train_ds = doCNN.getCNNData()
-    val_ds = doCNN.getCNNData(dataset="train",subset="validation")
-    h,model  = doCNN.doCNN(train_ds)
+    epochs = 50
+    train_ds = getCNNData()
+    val_ds = getCNNData(dataset="train",subset="validation")
+    history,model  = doCNN.doCNN(train_ds,valds=val_ds,epochs=epochs)
     plot_model(model,to_file='cnn_model.png',show_shapes = True,show_layer_activations=True)
+    doCNN.plots(history=history,epochs=epochs)
 
 
     
