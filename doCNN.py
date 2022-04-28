@@ -75,7 +75,7 @@ class doCNN:
 
 if __name__ == "__main__":
     train_ds = doCNN.getCNNData()
-    h,model  = doCNN.doCNN(train_ds,epochs=50)
+    h,model  = doCNN.doCNN(train_ds)
     plot_model(model,to_file='cnn_model.png',show_shapes = True,show_layer_activations=True)
 
 
