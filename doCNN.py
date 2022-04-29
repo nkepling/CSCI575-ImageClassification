@@ -22,7 +22,7 @@ img_width = 150
 def getCNNData(dataset = "train",subset = "training"):
         dset = "seg_"+dataset
         rootPath = Path.cwd()
-        data_dir = rootPath / "archive" / "seg_train" /dset
+        data_dir = rootPath / "archive" / dset /dset
         ds = image_dataset_from_directory(
         data_dir,
         validation_split=0.2,
@@ -43,7 +43,7 @@ class doCNN:
     def __init__(self) -> None:
         pass
 
-    def doCNN(trainds,valds,activation='relu',epochs =10):
+    def doCNN(trainds,valds,activation='relu',epochs =10,dropout=0.25):
         """
         build model, compile model
         """
@@ -51,14 +51,43 @@ class doCNN:
         model = Sequential([
         layers.Rescaling(1./255, input_shape=(img_height, img_width, 3)),
         layers.Conv2D(16, 3, padding='same', activation=activation),
+        layers.BatchNormalization(),
         layers.MaxPooling2D(),
+        layers.BatchNormalization(),
         layers.Conv2D(32, 3, padding='same', activation=activation),
+        layers.BatchNormalization(),
         layers.MaxPooling2D(),
         layers.Conv2D(64, 3, padding='same', activation=activation),
+        layers.BatchNormalization(),
         layers.MaxPooling2D(),
+        layers.Conv2D(128,3,padding='same',activation=activation),
+        layers.BatchNormalization(),
+        layers.MaxPooling2D(),
+        layers.Conv2d(256,3,padding='same',activation=activation),
+        layers.BatchNormalization(),
+        layers.MaxPooling2d(),
+        layers.Dropout(dropout),
+
         layers.Flatten(),
-        layers.Dense(128, activation='relu'),
-        layers.Dense(num_classes)
+        layers.Dense(256, activation='relu'),
+        layers.BatchNormalization(),
+        layers.Dropout(dropout),
+        layers.Dense(128,activation=activation),
+        layers.BatchNormalization(),
+        layers.Dropout(dropout),
+        layers.Dense(64, activation=activation),
+        layers.BatchNormalization(),
+        layers.Dropout(dropout),
+        layers.Dense(32,activation=activation),
+        layers.BatchNormalization(),
+        layers.Dropout(dropout),
+        layers.Dense(32,activation=activation),
+        layers.BatchNormalization(),
+        layers.Dropout(dropout),
+        layers.Dense(16,activation=activation),
+        layers.BatchNormalization(),
+        layers.Dropout(dropout),
+        layers.Dense(num_classes,activation="softmax")
         ])
         model.compile(optimizer='adam',
               loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
