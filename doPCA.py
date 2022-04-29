@@ -12,7 +12,7 @@ class doPCA:
     def __init__(self) -> None:
         pass    
     def screePlot(features: array):
-        pca = PCA(n_components=7)
+        pca = PCA(n_components=150)
         scl = StandardScaler()
         features = scl.fit_transform(features)
         pca.fit(features)
