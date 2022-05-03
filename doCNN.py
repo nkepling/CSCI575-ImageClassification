@@ -48,7 +48,7 @@ class doCNN:
         build model, compile model
         """
         num_classes = len(trainds.class_names)
-        data_augmentation = data_augmentation = keras.Sequential([layers.RandomFlip("horizontal",input_shape=(img_height,img_width,3)),layers.RandomRotation(0.1),layers.RandomZoom(0.1),])
+        data_augmentation = data_augmentation = Sequential([layers.RandomFlip("horizontal",input_shape=(img_height,img_width,3)),layers.RandomRotation(0.1),layers.RandomZoom(0.1),])
 
   
 
@@ -56,43 +56,43 @@ class doCNN:
         data_augmentation,
         layers.Rescaling(1./255, input_shape=(img_height, img_width, 3)),
         layers.Conv2D(16, 3, padding='same', activation=activation),
-        layers.BatchNormalization(),
+        #layers.BatchNormalization(),
         layers.MaxPooling2D(),
-        layers.BatchNormalization(),
+        #layers.BatchNormalization(),
         layers.Conv2D(32, 3, padding='same', activation=activation),
-        layers.BatchNormalization(),
+        #layers.BatchNormalization(),
         layers.MaxPooling2D(),
         layers.Conv2D(64, 3, padding='same', activation=activation),
-        layers.BatchNormalization(),
+        #layers.BatchNormalization(),
         layers.MaxPooling2D(),
         layers.Conv2D(128,3,padding='same',activation=activation),
+        #layers.BatchNormalization(),
+        layers.MaxPooling2D(),
+        layers.Conv2D(256,3,padding='same',activation=activation),
         layers.BatchNormalization(),
         layers.MaxPooling2D(),
-        layers.Conv2d(256,3,padding='same',activation=activation),
-        layers.BatchNormalization(),
-        layers.MaxPooling2d(),
         layers.Dropout(dropout),
 
         layers.Flatten(),
         layers.Dense(256, activation='relu'),
-        layers.BatchNormalization(),
+        #layers.BatchNormalization(),
         layers.Dropout(dropout),
         layers.Dense(128,activation=activation),
-        layers.BatchNormalization(),
-        layers.Dropout(dropout),
+        #layers.BatchNormalization(),
+        #layers.Dropout(dropout),
         layers.Dense(64, activation=activation),
-        layers.BatchNormalization(),
-        layers.Dropout(dropout),
+        #layers.BatchNormalization(),
+        #layers.Dropout(dropout),
         layers.Dense(32,activation=activation),
-        layers.BatchNormalization(),
-        layers.Dropout(dropout),
+        #layers.BatchNormalization(),
+        #layers.Dropout(dropout),
         layers.Dense(32,activation=activation),
-        layers.BatchNormalization(),
-        layers.Dropout(dropout),
+        #layers.BatchNormalization(),
+        #layers.Dropout(dropout),
         layers.Dense(16,activation=activation),
         layers.BatchNormalization(),
         layers.Dropout(dropout),
-        layers.Dense(num_classes,activation="softmax")
+        layers.Dense(num_classes)
         ])
         model.compile(optimizer='adam',
               loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
@@ -127,7 +127,7 @@ class doCNN:
         plt.legend(loc='upper right')
         plt.title('Training and Validation Loss')
         plt.savefig("acc_valPlots.png")
-
+        plt.show()
     
     def testCNN(testData):
         pass
@@ -147,7 +147,7 @@ class doCNN:
 
 
 if __name__ == "__main__":
-    epochs = 10
+    epochs = 50
     train_ds = getCNNData()
     val_ds = getCNNData(dataset="train",subset="validation")
     history,model  = doCNN.doCNN(train_ds,val_ds,epochs=epochs)
