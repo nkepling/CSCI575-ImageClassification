@@ -19,13 +19,13 @@ tf.random.set_seed(0)
 img_height = 150
 img_width = 150
 
-def getCNNData(dataset = "train",subset = "training"):
+def getCNNData(dataset = "train",subset = "training",validation_split=0.2):
         dset = "seg_"+dataset
         rootPath = Path.cwd()
         data_dir = rootPath / "archive" / dset /dset
         ds = image_dataset_from_directory(
         data_dir,
-        validation_split=0.2,
+        validation_split=validation_split,
         subset=subset,
         seed=123,
         labels='inferred',
@@ -130,12 +130,26 @@ class doCNN:
         plt.show()
     
     def testCNN(testData,model):
-        pass
-        #results = model.evaluate()
-        
+        results = model.evaluate(testData)
+        preds = model.predict(testData)        
+        y_pred = []  # store predicted labels
+        y_true = []  # store true labels
 
-    def validateCNN(validationData):
-        pass
+        # iterate over the dataset
+        for image_batch, label_batch in testData:   # use dataset.unbatch() with repeat
+        # append true labels
+            y_true.append(label_batch)
+            # compute predictions
+            preds = model.predict(image_batch)
+            # append predicted labels
+            y_pred.append(np.argmax(preds, axis = - 1))
+
+# convert the true and predicted labels into tensors
+        correct_labels = tf.concat([item for item in y_true], axis = 0)
+        predicted_labels = tf.concat([item for item in y_pred], axis = 0)
+        confusionMat = tf.math.confusion_matrix(correct_labels,predicted_labels,num_classes=6)
+
+        return confusionMat
 
 
 
@@ -149,13 +163,14 @@ class doCNN:
 
 
 if __name__ == "__main__":
-    epochs = 100
+    epochs = 50
     train_ds = getCNNData()
     val_ds = getCNNData(dataset="train",subset="validation")
     history,model  = doCNN.doCNN(train_ds,val_ds,epochs=epochs)
     plot_model(model,to_file='cnn_model.png',show_shapes = True,show_layer_activations=True)
     doCNN.plots(history=history,epochs=epochs)
-
+    testData = getCNNData("test",None,None)
+    confusion = testCNN(testData,model)
 
     
 
