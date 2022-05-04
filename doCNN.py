@@ -92,7 +92,7 @@ class doCNN:
         layers.Dense(16,activation=activation),
         layers.BatchNormalization(),
         layers.Dropout(dropout),
-        layers.Dense(num_classes)
+        layers.Dense(num_classes,activation= "softmax")
         ])
         model.compile(optimizer='adam',
               loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
@@ -129,8 +129,10 @@ class doCNN:
         plt.savefig("acc_valPlots.png")
         plt.show()
     
-    def testCNN(testData):
+    def testCNN(testData,model):
         pass
+        #results = model.evaluate()
+        
 
     def validateCNN(validationData):
         pass
@@ -147,7 +149,7 @@ class doCNN:
 
 
 if __name__ == "__main__":
-    epochs = 50
+    epochs = 100
     train_ds = getCNNData()
     val_ds = getCNNData(dataset="train",subset="validation")
     history,model  = doCNN.doCNN(train_ds,val_ds,epochs=epochs)
