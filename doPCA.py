@@ -22,6 +22,7 @@ class doPCA:
         plt.xlabel("Number of Principal Components")
         plt.ylabel("Variance Explained")
         plt.show()
+        plt.savefig("scree_plot.png")
         return None
 
 
@@ -29,3 +30,4 @@ class doPCA:
 if __name__ == '__main__':
     X,y = getData.loadFeatureMat()
     doPCA.screePlot(X)
+

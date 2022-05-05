@@ -7,12 +7,12 @@ from sklearn import svm
 import matplotlib.pyplot as plt
 from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import cross_val_score
-from sklearn.metrics import confusion_matrix, f1_score, classification_report, make_scorer
+from sklearn.metrics import confusion_matrix, f1_score, classification_report, make_scorer,accuracy_score
 
 
 
 def doSVM(features:array, labels: array):
-    pca = PCA(n_components=2)
+    pca = PCA(n_components=20)
     scl = StandardScaler()
     features = scl.fit_transform(features)
     features = pca.fit_transform(features)
@@ -22,7 +22,7 @@ def doSVM(features:array, labels: array):
 
 def testSVM(features:array, labels: array, ytest: array, xtest: array):
     clf = doSVM(features, labels)
-    pca = PCA(n_components=2)
+    pca = PCA(n_components=20)
     scl = StandardScaler()
     features = scl.fit_transform(features)
     features = pca.fit_transform(features)
@@ -38,6 +38,7 @@ def testSVM(features:array, labels: array, ytest: array, xtest: array):
     print(confusion_matrix(ytest, predictedSVM))
     #classification report
     print(classification_report(ytest, predictedSVM, labels = [1]))
+    print(accuracy_score(ytest,predictedSVM))
 
 if __name__ == "__main__":
     xTrain,yTrain = getData.loadFeatureMat()
